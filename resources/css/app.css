@@ -1,0 +1,18 @@
+@import "tailwindcss";
+/* @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ovo&display=swap"); */
+
+/* motion untuk animasi */
+/* @plugin "tailwindcss-motion"; */
+
+/* dark mode */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+/* custom di tailwind */
+/* @theme {
+  --font-ovo: "Ovo", serif;
+  --color-button-light: #6366f1;
+  --color-button-dark: #161616;
+  --color-primary: #242424;
+  --color-secondary: #565656;
+  --color-secondary-dark: #D1D5DB;
+} */
