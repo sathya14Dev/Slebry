@@ -13,7 +13,8 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        $status = Status::all();
+        return view('Admin.status.index', compact('status'));
     }
 
     /**
@@ -21,7 +22,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.status.crate', compact('status'));
     }
 
     /**
@@ -29,7 +30,13 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:statuses'
+        ]);
+
+        Status::create($request->all());
+
+        return redirect()->route('admin.status.index')->with('success', 'Status created successfully');
     }
 
     /**
@@ -37,7 +44,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        //
+        return view('Admin.status.show', compact('status'));
     }
 
     /**
@@ -45,7 +52,7 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
-        //
+        return view('Admin.status.edit', compact('status'));
     }
 
     /**
@@ -53,7 +60,13 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:statuses'
+        ]);
+
+        $status->update($request->all());
+
+        return redirect()->route('admin.status.index')->with('success', 'status updated successfully');
     }
 
     /**
@@ -61,6 +74,8 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        //
+        $status->delete();
+
+        return redirect()->route('admin.status.index')->with('success', 'status deleted successfully');
     }
 }
