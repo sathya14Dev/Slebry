@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -14,17 +15,25 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        if (auth()->attempt($credentials)) {
+        // Attempt login
+        if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            if (auth()->user()->role === 'admin') {
+            // Get authenticated user
+            $user = Auth::user();
+
+            // Check role and redirect accordingly
+            if ($user->role === 'admin') {
                 return redirect()->intended('/admin/dashboard');
+            } elseif ($user->role === 'user') {
+                return redirect()->intended('/user/dashboard');
             } else {
+                // Default redirect if role not recognized
                 return redirect()->intended('/user/dashboard');
             }
         }
@@ -32,5 +41,15 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'You have been logged out.');
     }
 }
