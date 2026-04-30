@@ -28,9 +28,9 @@ class LoginController extends Controller
             $user = Auth::user();
 
             // Check role and redirect accordingly
-            if ($user->role === 'admin') {
+            if ($user->role_id === 1) {
                 return redirect()->intended('/admin/dashboard');
-            } elseif ($user->role === 'user') {
+            } elseif ($user->role_id === 2) {
                 return redirect()->intended('/user/dashboard');
             } else {
                 // Default redirect if role not recognized
