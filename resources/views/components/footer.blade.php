@@ -12,9 +12,9 @@
             <div>
                 <h3 class="text-white font-semibold mb-4">Navigasi</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/" class="hover:text-white transition">Home</a></li>
-                    <li><a href="/books" class="hover:text-white transition">Buku</a></li>
-                    <li><a href="#tentang" class="hover:text-white transition">Tentang</a></li>
+                    <li><a href="/home" class="hover:text-white transition">Home</a></li>
+                    <li><a href="/information" class="hover:text-white transition">Information</a></li>
+                    <li><a href="/books" class="hover:text-white transition">Books</a></li>
                 </ul>
             </div>
             <div>

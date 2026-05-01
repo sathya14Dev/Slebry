@@ -31,6 +31,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/books', [UserBookController::class, 'index'])->name('user.books.index');
+Route::get('/books/{book}', [UserBookController::class, 'show'])->name('user.books.show');
+
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -43,11 +46,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-
-    // lihat buku
-    Route::get('/books', [UserBookController::class, 'index'])->name('user.books.index');
-    Route::get('/books/{book}', [UserBookController::class, 'show'])->name('user.books.show');
-
+    
     // transaksi peminjaman
     Route::resource('transactions', TransactionController::class)->only([
         'index',

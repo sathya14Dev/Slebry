@@ -4,7 +4,7 @@
 
     <div class="space-x-4 text-secondary">
         <a href="/home">Home</a>
-        <a href="/tentang">Tentang</a>
+        <a href="/information">Information</a>
         <a href="/books">Books</a>
 
         @auth
